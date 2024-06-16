@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irisabella healing praktijk</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f0f0f0;
+            scroll-behavior: smooth; 
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #5C6BC0;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            padding: 10px 0;
+            height: 55px; 
+        }
+        .desktop-menu {
+            display: flex;
+            justify-content: center; 
+            width: 100%;
+        }
+        nav a {
+            color: #fff;
+            padding: 10px 15px;
+            margin: 5px 5px;
+            text-decoration: none;
+            background-color: #5C6BC0;
+            border-radius: 20px; 
+            transition: background-color 0.3s, box-shadow 0.3s; 
+        }
+        nav a:hover {
+            background-color: #3F51B5;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+        header, section {
+            padding: 40px 20px; 
+            text-align: center;
+            margin-top: 20px; 
+        }
+        header {
+            background-color: #f7f7f7;
+        }
+        section {
+            background-color: #fff;
+            margin: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.5s;
+        }
+        section:nth-child(even) {
+            background-color: #D1C4E9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 20px; 
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .slides {
+            display: none;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .slides.active {
+            display: block;
+            opacity: 1;
+        }
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+        .fade {
+            animation-name: fade;
+            animation-duration: 2s;
+        }
+        @media (max-width: 600px) {
+            nav {
+                display: none; 
+            }
+            header, section {
+                padding: 10px 10px 20px; 
+                margin-top: 0; 
+            }
+            #welkom {
+                padding-top: 0px; 
+            }
+        }
+        .testimonial-carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            margin: auto;
+        }
+        .testimonial-item {
+            flex: 0 0 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimonial-container {
+            display: flex;
+        }
+        .testimonial {
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px;
+            text-align: center;
+            overflow-wrap: break-word; 
+            word-break: break-word; 
+            overflow: hidden; 
+            box-sizing: border-box; 
+        }
+        .testimonial p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .testimonial h3 {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+        .smaller-img {
+            width: 430px;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+        @media (max-width: 600px) {
+            .smaller-img {
+                width: 280px;
+            }
+        }
+        .contact-img {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        #wat-is-healing {
+            margin-top: 15px; 
+        }
+        @media (max-width: 600px) {
+            #reviews .container {
+            padding: 0 10px; 
+            }
+            .testimonial-carousel {
+                width: 100%; 
+            }
+            .testimonial-container {
+                width: 100%; 
+            }
+            .testimonial-item {
+                flex: 0 0 100%;
+                margin: 0; 
+                padding: 0 10px; 
+                box-sizing: border-box;
+            }
+            .testimonial {
+                margin: 10px 0;
+                padding: 15px; 
+                background: #f7f7f7;
+                border-radius: 10px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+    }
+
+
+
+         
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="desktop-menu">
+            <a href="#welkom">Welkom</a>
+            <a href="#wat-is-healing">Wat is Healing</a>
+            <a href="#mijn-aanpak">Mijn Aanpak</a>
+            <a href="#wie-ben-ik">Wie ben ik</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header id="welkom">
+        <div class="container">
+            <h1>Welkom</h1>
+            <p>Welkom op mijn website. Ik ben Irisabella Bakker en ik ben gepassioneerd om mensen te helpen via healing.</p>
+            <p>Of je nu op zoek bent naar rust, balans of herstel, ik sta voor je klaar. Samen werken we aan het herstellen van je energie en het vinden van de balans die je nodig hebt om weer helemaal in je kracht te staan.</p>
+            <p>Hier vind je alles over hoe ik je kan ondersteunen. Voel je vrij om contact met me op te nemen voor meer informatie of om een afspraak te maken.</p>
+        </div>
+    </header>
+
+    <div class="full-width-container">
+        <div class="slideshow-container">
+            <img src="roze_zee.jpg" class="slides active">
+            <img src="blauwe_zee.jpg" class="slides">
+            <img src="boom_water.jpeg" class="slides">
+            <img src="zee_strand_zon_onder.jpg" class="slides">
+            <img src="schuim.jpg" class="slides">
+        </div>
+    </div> 
+
+    <section id="wat-is-healing">
+        <div class="container">
+            <h2>Wat is Healing</h2>
+            <p>Healing is een natuurlijke manier om lichaam en geest weer in balans te brengen. Het helpt je energie te herstellen en blokkades op te heffen die je welzijn kunnen belemmeren.</p>
+            <p>Tijdens een healing sessie werk ik met energie om je zelfhelend vermogen te activeren. Dit kan je helpen om stress te verminderen, je emoties beter te begrijpen zodat je leert er makkelijker en beter mee om te gaan, en een diepere staat van ontspanning te bereiken.</p>
+            <p>Of je nu te maken hebt met fysieke klachten, emotionele uitdagingen of gewoon behoefte hebt aan meer innerlijke rust, healing kan je ondersteunen op jouw weg naar herstel en balans. Zo kun je met meer vreugde en rust in het leven staan.</p>
+        </div>
+    </section>
+
+    <section id="mijn-aanpak">
+        <div class="container">
+            <h2>Mijn Aanpak</h2>
+            <p>Wanneer je bij mij komt, beginnen we met een gesprek om te begrijpen wat er speelt in je leven. Daarna volgt een healing sessie van ruim een uur.</p>
+            <p>Tijdens de sessie voel ik verschillende lagen van stress, zoals fysieke en emotionele stress, door het aanraken van je lichaam. Soms zitten deze blokkades er al een tijdje, waardoor er meerdere sessies nodig kunnen zijn.</p>
+            <p>Tijdens de sessie houd je gewoon je kleding aan. Na de sessie bespreken we hoe je het hebt ervaren en of je direct een vervolgafspraak wilt maken. Een healing heeft een doorwerking van enkele weken, dus vaak is pas na een paar weken een tweede, derde of vierde behandeling nodig.</p>
+        </div>
+    </section>
+
+    <section id="wie-ben-ik">
+        <div class="container">
+            <h2>Wie ben ik</h2>
+            <p>Mijn naam is Irisabella Bakker en ik woon en werk op het prachtige Texel. Ik ben een gepassioneerd en empathisch persoon met een sterke connectie met de natuur en de mensen om mij heen.</p>
+            <p>Ik run mijn eigen bedrijf en ondersteun ondernemers met hun bedrijfsvoering. Hoewel mijn focus voornamelijk ligt op financiële ondersteuning, reikt mijn inzet vaak verder. Veel ondernemers kunnen, al dan niet tijdelijk, ook op andere gebieden wel wat hulp gebruiken. Wat ik vooral breng is rust; niet zozeer als ik bij je op bezoek ben misschien, maar zeker in je werkwijze. Ik houd van duidelijkheid en strakke lijnen, en zorg ervoor dat alles goed is geregeld, zodat jij overzicht hebt en kunt doen waar je goed in bent: ondernemen. Maar vergeet niet, we doen het samen.</p>
+            <p>Ik geniet ervan om buiten te zijn, wandel graag langs de kust en ga het hele jaar door drie keer per week de zee in voor mijn fysieke en mentale gezondheid. Daarnaast zing ik al ruim 25 jaar in een a cappella groep van drie vrouwen. Muziek is voor mij een krachtige manier om energie door te geven en te ontvangen. Het brengt veel vreugde en vrolijkheid in mijn leven.</p>
+            <p>Ik hecht veel waarde aan oprechte verbindingen en geloof in de kracht van positieve energie en intentie. Het is mijn doel om anderen te helpen hun innerlijke kracht te ontdekken en te gebruiken om een evenwichtiger en vervullender leven te leiden.</p>
+            <img src="irisabella.jpg" alt="Irisabella Bakker" class="smaller-img">
+        </div>
+    </section>
+
+    <section id="reviews">
+        <div class="container">
+            <h2>Reviews</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial-container">
+                    <div class="testimonial-item">
+                        <div class="testimonial">
+                            <p>Lieve Irisabella,</p>
+                            <p>Wat ben jij een mooi mens. Het is bijzonder om bij je te zijn en een healing van jou te mogen ontvangen. Met de behandeling ben je in staat om op te ruimen en te laten stromen. Dat geeft voor mij heel veel ruimte om te leven zonder blokkades en ballast. Ik kan het aan iedereen aanbevelen.</p>
+                            <h3>- Hélène</h3>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial">
+                            <p>Voor ik naar de sessie kwam, was ik een beetje gespannen omdat ik niet wist wat ik kon verwachten. Ik heb de sessie als heel bijzonder en ontspannend ervaren en ik voelde me heel prettig en veilig bij Irisabella. Ik kan het echt iedereen aanraden.</p>
+                            <h3>- Marielle</h3>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial">
+                            <p>Ik vond de healing zacht, liefdevol en heel ontspannen. Ik kreeg mooie inzichten!</p>
+                            <h3>- Sandra</h3>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial">
+                            <p>Lieve Irisabella,</p>
+                            <p>De wijze waarop jij bij en voor mij healing doet is niet alleen heel bijzonder, maar het werkt en helpt ook echt! Het geeft me rust, ruimte en balans in het omgaan met de vele gevoelens en emoties die er kunnen zijn. Het is zeker een aanrader voor ieder mens!</p>
+                            <h3>- Wil</h3>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial">
+                            <p>Vanaf het eerste moment dat ik bij Irisabella binnenstapte in haar praktijk, voelde het heel warm en fijn aan. Ze neemt de tijd om naar je verhaal te luisteren en gaat daarna met je aan de slag.</p>
+                            <p>De twee keer dat ik nu geweest ben, hebben mij ontzettend goed gedaan. De klachten en spanningen die ik had, zijn zo goed als weg. Mijn energie stroomt weer!</p>
+                            <p>Irisabella is een hele lieve, fijne vrouw bij wie je je onmiddellijk veilig en vertrouwd voelt, en je weet dat het goed is.</p>
+                            <h3>- Jennie</h3>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial">
+                            <p>Ik kwam binnen, druk in mijn lijf en hoofd wegens werk en relatie. Door de healing ben ik weer helemaal tot (innerlijke) rust gekomen, wat een paar dagen heeft aangehouden. De healing zelf voelde zacht, rustig en toch krachtig!</p>
+                            <h3>- Jo</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <p>Heb je vragen of wil je een afspraak maken? Neem dan gerust contact met me op. Ik sta klaar om je te helpen en je vragen te beantwoorden. Je kunt me bereiken via de onderstaande contactgegevens.</p>
+            <p><strong>Telefoon:</strong> <a href="tel:+31653245253">06 53 24 52 53</a></p>
+            <p><strong>E-mail:</strong> <a href="mailto:Irisabella@xs4all.nl">Irisabella@xs4all.nl</a></p>
+            <img src="contact.jpg" alt="Contact" class="contact-img">
+        </div>
+    </section>
+
+    <script>
+                let slideIndex = 0;
+        let testimonialIndex = 0;
+        let testimonialTimeout;
+        let startX = 0;
+        let endX = 0;
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            shuffleTestimonials(); 
+            showSlides();
+            showTestimonials();
+    
+            const testimonials = document.querySelectorAll(".testimonial");
+            testimonials.forEach(testimonial => {
+                testimonial.addEventListener('click', function() {
+                    if (window.innerWidth > 600) { 
+                        resetTestimonialTimer();
+                        nextTestimonial();
+                    }
+                });
+            });
+    
+            const carousel = document.querySelector('.testimonial-carousel');
+            carousel.addEventListener('touchstart', handleTouchStart, false);
+            carousel.addEventListener('touchmove', handleTouchMove, false);
+            carousel.addEventListener('touchend', handleTouchEnd, false);
+        });
+    
+        function shuffleTestimonials() {
+            const container = document.querySelector('.testimonial-container');
+            const testimonials = Array.from(container.children);
+            for (let i = testimonials.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                container.appendChild(testimonials[j]);
+            }
+        }
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].classList.add("active");
+            setTimeout(showSlides, 5000); 
+        }
+    
+        function showTestimonials() {
+            let testimonials = document.getElementsByClassName("testimonial-item");
+            for (let i = 0; i < testimonials.length; i++) {
+                testimonials[i].style.transform = `translateX(-${testimonialIndex * 100}%)`;
+            }
+            testimonialIndex++;
+            if (testimonialIndex >= testimonials.length) {testimonialIndex = 0}
+            testimonialTimeout = setTimeout(showTestimonials, 10000); 
+        }
+    
+        function nextTestimonial() {
+            testimonialIndex++;
+            if (testimonialIndex >= document.getElementsByClassName("testimonial-item").length) {
+                testimonialIndex = 0;
+            }
+            updateTestimonials();
+        }
+    
+        function prevTestimonial() {
+            testimonialIndex--;
+            if (testimonialIndex < 0) {
+                testimonialIndex = document.getElementsByClassName("testimonial-item").length - 1;
+            }
+            updateTestimonials();
+        }
+    
+        function updateTestimonials() {
+            let testimonials = document.getElementsByClassName("testimonial-item");
+            for (let i = 0; i < testimonials.length; i++) {
+                testimonials[i].style.transform = `translateX(-${testimonialIndex * 100}%)`;
+            }
+        }
+    
+        function handleTouchStart(event) {
+            const firstTouch = event.touches[0];
+            startX = firstTouch.clientX;
+        }
+    
+        function handleTouchMove(event) {
+            if (event.touches.length > 1) {
+                return; 
+            }
+            const touch = event.touches[0];
+            endX = touch.clientX;
+        }
+    
+        function handleTouchEnd() {
+            const threshold = 50; 
+            if (startX - endX > threshold) {
+                nextTestimonial();
+            } else if (endX - startX > threshold) {
+                prevTestimonial();
+            }
+            resetTestimonialTimer();
+        }
+    
+        function resetTestimonialTimer() {
+            clearTimeout(testimonialTimeout);
+            testimonialTimeout = setTimeout(showTestimonials, 10000);
+        }
+    </script>
+</body>
+</html>
+    
