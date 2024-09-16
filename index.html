@@ -477,7 +477,20 @@
                     showTestimonial(1);
                 }, 10000);
             }
-        });
+
+            // Get the testimonial control buttons
+            const prevButton = document.getElementById('prev-testimonial');
+            const nextButton = document.getElementById('next-testimonial');
+
+            // Function to remove focus after click
+            function removeFocus(event) {
+                event.target.blur();
+            }
+
+            // Add event listeners to both buttons
+            prevButton.addEventListener('click', removeFocus);
+            nextButton.addEventListener('click', removeFocus);
+                });
     </script>
 </body>
 </html>
