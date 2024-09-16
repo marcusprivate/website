@@ -48,9 +48,22 @@
             transition: background-color 0.3s, box-shadow 0.3s; 
         }
 
-        nav a:hover {
-            background-color: #3F51B5;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        /* Wrap hover and active states in a media query */
+        @media (hover: hover) {
+            nav a:hover {
+                background-color: #3F51B5;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            }
+            .testimonial-controls button:hover {
+                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                transform: scale(1.1);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            }
+            .testimonial-controls button:active {
+                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                transform: scale(1.05);
+                box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            }
         }
 
         header, section {
@@ -193,32 +206,23 @@
             margin: 0 15px;
         }
 
-
         .testimonial-controls button span {
             position: relative;
             top: -1px; /* Adjust this value to move the characters up or down */
         }
 
-        .testimonial-controls button:hover {
-            background: linear-gradient(135deg, #3F51B5, #1A237E);
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .testimonial-controls button:active {
-            background: linear-gradient(135deg, #3F51B5, #1A237E);
-            transform: scale(1.05);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-        }
-
         @media (hover: hover) {
-                .testimonial-controls button:hover {
-                    background: linear-gradient(135deg, #3F51B5, #1A237E);
-                    transform: scale(1.1);
-                    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-                }
+            .testimonial-controls button:hover {
+                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                transform: scale(1.1);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            }
+            .testimonial-controls button:active {
+                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                transform: scale(1.05);
+                box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            }
         }
-
 
         /* Responsive Styling */
         @media (max-width: 600px) {
@@ -490,7 +494,7 @@
             // Add event listeners to both buttons
             prevButton.addEventListener('click', removeFocus);
             nextButton.addEventListener('click', removeFocus);
-                });
+        });
     </script>
 </body>
 </html>
