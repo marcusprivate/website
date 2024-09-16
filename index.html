@@ -189,10 +189,10 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
             margin: 0 15px;
-            /* line-height: 1;  Uncomment if needed */
         }
+
 
         .testimonial-controls button span {
             position: relative;
@@ -203,6 +203,20 @@
             background: linear-gradient(135deg, #3F51B5, #1A237E);
             transform: scale(1.1);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-controls button:active {
+            background: linear-gradient(135deg, #3F51B5, #1A237E);
+            transform: scale(1.05);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (hover: hover) {
+                .testimonial-controls button:hover {
+                    background: linear-gradient(135deg, #3F51B5, #1A237E);
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+                }
         }
 
 
