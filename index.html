@@ -6,12 +6,12 @@
     <title>Irisabella healing praktijk</title>
     <!-- Externe stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Load custom font stylesheet -->
+    <link rel="stylesheet" href="fonts.css">
     <!-- Interne CSS -->
     <style>
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Gotham Rounded Medium', sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
@@ -23,7 +23,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: #5C6BC0;
+            background-color: #5C2282;
             color: #fff;
             display: flex;
             justify-content: center;
@@ -43,7 +43,7 @@
             padding: 10px 15px;
             margin: 5px 5px;
             text-decoration: none;
-            background-color: #5C6BC0;
+            background-color: #5C2282;
             border-radius: 20px; 
             transition: background-color 0.3s, box-shadow 0.3s; 
         }
@@ -51,16 +51,16 @@
         /* Wrap hover and active states in a media query */
         @media (hover: hover) {
             nav a:hover {
-                background-color: #3F51B5;
+                background-color: #F49300;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
             }
             .testimonial-controls button:hover {
-                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                background: linear-gradient(135deg, #F49300, #F49300);
                 transform: scale(1.1);
                 box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             }
             .testimonial-controls button:active {
-                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                background: linear-gradient(135deg, #F49300, #F49300);
                 transform: scale(1.05);
                 box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
             }
@@ -87,7 +87,7 @@
         }
 
         section:nth-child(even) {
-            background-color: #D1C4E9;
+            background-color: #CAB2E0;
         }
 
         .container {
@@ -190,7 +190,7 @@
         }
 
         .testimonial-controls button {
-            background: linear-gradient(135deg, #5C6BC0, #3F51B5);
+            background: linear-gradient(135deg, #F49300, #F49300);
             color: #fff;
             border: none;
             width: 50px;
@@ -213,12 +213,12 @@
 
         @media (hover: hover) {
             .testimonial-controls button:hover {
-                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                background: linear-gradient(135deg, #F49300, #F49300);
                 transform: scale(1.1);
                 box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             }
             .testimonial-controls button:active {
-                background: linear-gradient(135deg, #3F51B5, #1A237E);
+                background: linear-gradient(135deg, #F49300, #F49300);
                 transform: scale(1.05);
                 box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
             }
@@ -232,6 +232,12 @@
             .testimonial-controls button {
                 padding: 8px 12px;
             }
+        }
+
+        /* Apply Fonia Regular to all H2 headings with increased font size */
+        h2 {
+            font-family: 'Fonia Regular', sans-serif;
+            font-size: 1.6em; /* Adjust this value as needed */
         }
     </style>
 </head>
@@ -248,8 +254,9 @@
     </nav>
 
     <header id="welkom">
-        <div class="container">
-            <h1>Welkom</h1>
+        <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
+            <img src="Irisabella_Healing_Praktijk_RGB.png" alt="Top Banner" style="width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto;">
+        </div>
             <p>Welkom op mijn website. Ik ben Irisabella Bakker en ik ben gepassioneerd om mensen te helpen via healing.</p>
             <p>Of je nu op zoek bent naar rust, balans of herstel, ik sta voor je klaar. Samen werken we aan het herstellen van je energie en het vinden van de balans die je nodig hebt om weer helemaal in je kracht te staan.</p>
             <p>Hier vind je alles over hoe ik je kan ondersteunen. Voel je vrij om contact met me op te nemen voor meer informatie of om een afspraak te maken.</p>
@@ -408,7 +415,10 @@
             <a href="https://www.instagram.com/irisabellahealing" target="_blank">
                 <i class="fab fa-instagram"></i> Irisabella Healing Texel
             </a>
-            <img src="contact.jpg" alt="Contact" class="contact-img">
+            <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
+                <img src="Irisabella_Healing_Praktijk_RGB.png" alt="Top Banner" style="width: 100%; max-width: 270px; height: auto; display: block; margin: 0 auto;">
+            </div>
+            <!-- <img src="contact.jpg" alt="Contact" class="contact-img"> -->
         </div>
     </section>
 
