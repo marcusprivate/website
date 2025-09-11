@@ -168,7 +168,8 @@
             position: relative;
             overflow: hidden;
             max-width: 800px;
-            margin: 20px auto;
+            margin: 0 auto;
+            transition: min-height 0.3s ease-in-out;
         }
 
         .testimonial {
@@ -187,17 +188,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 20px;
         }
 
         .testimonial-controls button {
             background: linear-gradient(135deg, #F49300, #F49300);
             color: #fff;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -308,6 +310,10 @@
     <section id="reviews">
         <div class="container">
             <h2>Reviews</h2>
+            <div class="testimonial-controls">
+                <button id="prev-testimonial"><span>&laquo;</span></button>
+                <button id="next-testimonial"><span>&raquo;</span></button>
+            </div>
             <div class="testimonial-wrapper">
                 <!-- Testimonial 1 -->
                 <div class="testimonial">
@@ -421,10 +427,6 @@
                     <h3>- Elisabeth</h3>
                 </div>
             </div>
-            <div class="testimonial-controls">
-                <button id="prev-testimonial"><span>&laquo;</span></button>
-                <button id="next-testimonial"><span>&raquo;</span></button>
-            </div>
         </div>
     </section>
 
@@ -469,9 +471,50 @@
 
             // Shuffle testimonials
             shuffleArray(testimonials);
+            
+            // Re-query testimonials in their new shuffled order
+            testimonials = Array.from(document.querySelectorAll('.testimonial-wrapper .testimonial'));
+
+            function setWrapperHeight() {
+                const wrapper = document.querySelector('.testimonial-wrapper');
+                let maxHeight = 0;
+
+                // Find the height of the tallest testimonial
+                testimonials.forEach(testimonial => {
+                    const isActive = testimonial.classList.contains('active');
+                    // Temporarily display to measure if it's not the active one
+                    if (!isActive) {
+                        testimonial.style.position = 'absolute';
+                        testimonial.style.visibility = 'hidden';
+                        testimonial.style.display = 'block';
+                    }
+                    
+                    if (testimonial.offsetHeight > maxHeight) {
+                        maxHeight = testimonial.offsetHeight;
+                    }
+
+                    // Reset styles if they were changed
+                    if (!isActive) {
+                        testimonial.style.position = '';
+                        testimonial.style.visibility = '';
+                        testimonial.style.display = '';
+                    }
+                });
+
+                // Set the wrapper's min-height
+                if (wrapper) {
+                    wrapper.style.minHeight = `${maxHeight}px`;
+                }
+            }
+
+            // Set height on load and on window resize
+            setWrapperHeight();
+            window.addEventListener('resize', setWrapperHeight);
 
             // Display the first testimonial
-            testimonials[currentTestimonialIndex].classList.add('active');
+            if (testimonials.length > 0) {
+                testimonials[currentTestimonialIndex].classList.add('active');
+            }
 
             // Automatic switching every 10 seconds
             let testimonialInterval = setInterval(function() {
@@ -512,9 +555,11 @@
             }
 
             function showTestimonial(direction) {
+                if (testimonials.length === 0) return;
                 testimonials[currentTestimonialIndex].classList.remove('active');
                 currentTestimonialIndex = (currentTestimonialIndex + direction + testimonials.length) % testimonials.length;
                 testimonials[currentTestimonialIndex].classList.add('active');
+                resetTestimonialInterval();
             }
 
             function shuffleArray(array) {
@@ -525,6 +570,7 @@
                 }
                 // Update the DOM
                 const container = document.querySelector('.testimonial-wrapper');
+                if (!container) return;
                 container.innerHTML = '';
                 array.forEach(item => container.appendChild(item));
             }
