@@ -33,6 +33,38 @@
             height: 55px; 
         }
 
+        /* Add these styles for the Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .bar {
+            height: 2px;
+            width: 24px;
+            background-color: #fff;
+            margin: 3px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+
+        /* Hamburger Animation */
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(5px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-5px) rotate(-45deg);
+        }
+
         .desktop-menu {
             display: flex;
             justify-content: center; 
@@ -47,6 +79,12 @@
             background-color: #5C2282;
             border-radius: 20px; 
             transition: background-color 0.3s, box-shadow 0.3s; 
+        }
+
+        nav a.cta-button {
+            background-color: #F49300;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         /* Wrap hover and active states in a media query */
@@ -129,8 +167,62 @@
         }
 
         @media (max-width: 600px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .desktop-menu {
+                display: none;
+                flex-direction: column;
+                width: 50%;
+                position: absolute;
+                top: 55px; /* Height of the nav bar */
+                right: 0;
+                background-color: #F9F5FC; /* Light lavender to blend better */
+                padding: 10px 0;
+                border-bottom-left-radius: 20px;
+                border-top-left-radius: 20px;
+                box-shadow: -5px 10px 20px rgba(0,0,0,0.08);
+            }
+
+            .desktop-menu.active {
+                display: flex;
+            }
+
+            .desktop-menu a {
+                margin: 5px 15px;
+                padding: 12px 20px;
+                text-align: center;
+                background-color: transparent;
+                color: #5C2282;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .desktop-menu a.cta-button {
+                background-color: #F49300;
+                color: #fff;
+                font-weight: bold;
+                margin-top: 10px;
+                box-shadow: 0 4px 6px rgba(244, 147, 0, 0.3);
+            }
+
+            .desktop-menu a:hover {
+                background-color: #F49300;
+                color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            
+            .container {
+                width: 90%;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
             nav {
-                display: none; 
+                display: flex; /* Ensure nav is displayed on mobile */
             }
             header, section {
                 padding: 10px 10px 20px; 
@@ -267,13 +359,18 @@
 </head>
 <body>
     <nav>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
         <div class="desktop-menu">
             <a href="#welkom">Welkom</a>
             <a href="#wat-is-healing">Wat is Healing</a>
             <a href="#mijn-aanpak">Mijn Aanpak</a>
             <a href="#wie-ben-ik">Wie ben ik</a>
             <a href="#reviews">Reviews</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact" class="cta-button">Contact</a>
         </div>
     </nav>
 
@@ -474,6 +571,26 @@
     <!-- Scripts -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('mobile-menu');
+            const navMenu = document.querySelector('.desktop-menu');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+
+            // Close mobile menu when a link is clicked
+            const navLinks = document.querySelectorAll('.desktop-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                });
+            });
+
             // Slideshow
             let slideIndex = 0;
             showSlides();
@@ -605,19 +722,6 @@
                     showTestimonial(1);
                 }, 10000);
             }
-
-            // Get the testimonial control buttons
-            const prevButton = document.getElementById('prev-testimonial');
-            const nextButton = document.getElementById('next-testimonial');
-
-            // Function to remove focus after click
-            function removeFocus(event) {
-                event.target.blur();
-            }
-
-            // Add event listeners to both buttons
-            prevButton.addEventListener('click', removeFocus);
-            nextButton.addEventListener('click', removeFocus);
         });
     </script>
 </body>
