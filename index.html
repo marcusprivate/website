@@ -613,6 +613,8 @@
                         testimonial.style.position = 'absolute';
                         testimonial.style.visibility = 'hidden';
                         testimonial.style.display = 'block';
+                        testimonial.style.width = '100%'; 
+                        testimonial.style.boxSizing = 'border-box';
                     }
                     
                     if (testimonial.offsetHeight > maxHeight) {
@@ -624,6 +626,8 @@
                         testimonial.style.position = '';
                         testimonial.style.visibility = '';
                         testimonial.style.display = '';
+                        testimonial.style.width = '';
+                        testimonial.style.boxSizing = '';
                     }
                 });
 
