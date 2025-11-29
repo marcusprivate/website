@@ -31,6 +31,11 @@
             z-index: 1000;
             padding: 10px 0;
             height: 55px; 
+            transition: top 0.3s; /* Smooth transition for hiding/showing */
+        }
+
+        .nav-hidden {
+            top: -80px; /* Hide navigation bar above the viewport */
         }
 
         /* Add these styles for the Hamburger Menu */
@@ -711,6 +716,26 @@
                     showTestimonial(1);
                 }, 10000);
             }
+
+            // Smart Navbar Logic
+            let lastScrollTop = 0;
+            const nav = document.querySelector('nav');
+
+            window.addEventListener('scroll', function() {
+                // Don't hide if mobile menu is open
+                if (navMenu.classList.contains('active')) return;
+
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 75) {
+                    // Scrolling down and past the navbar height
+                    nav.classList.add('nav-hidden');
+                } else {
+                    // Scrolling up
+                    nav.classList.remove('nav-hidden');
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+            });
         });
     </script>
 </body>
