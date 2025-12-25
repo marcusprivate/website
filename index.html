@@ -449,9 +449,18 @@
     </section>
 
     <!-- Scripts -->
-    <script src="testimonials.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", async function() {
+            // Load testimonials from YAML
+            let testimonials = [];
+            try {
+                const response = await fetch('testimonials.yaml');
+                const yamlText = await response.text();
+                testimonials = jsyaml.load(yamlText);
+            } catch (error) {
+                console.error('Error loading testimonials:', error);
+            }
             // Mobile Menu Toggle
             const menuToggle = document.getElementById('mobile-menu');
             const navMenu = document.querySelector('.desktop-menu');
@@ -488,7 +497,6 @@
             }
 
             // Testimonials
-            let testimonials = window.testimonialsData || [];
             let currentTestimonialIndex = 0;
             let testimonialInterval;
 
@@ -508,14 +516,16 @@
                     testimonialDiv.classList.add('testimonial');
                     if (index === 0) testimonialDiv.classList.add('active');
 
-                    testimonialData.text.forEach(paragraph => {
+                    // Split multiline text by double newlines into paragraphs
+                    const paragraphs = testimonialData.tekst.trim().split(/\n\n+/);
+                    paragraphs.forEach(paragraph => {
                         const p = document.createElement('p');
                         p.textContent = paragraph;
                         testimonialDiv.appendChild(p);
                     });
 
                     const h3 = document.createElement('h3');
-                    h3.textContent = `- ${testimonialData.author}`;
+                    h3.textContent = `- ${testimonialData.naam}`;
                     testimonialDiv.appendChild(h3);
 
                     wrapper.appendChild(testimonialDiv);
