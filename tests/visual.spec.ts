@@ -117,7 +117,7 @@ test.describe('Visual Regression', () => {
     test('logo', async ({ page, desktop }) => {
       await page.goto('/');
       await waitForPageReady(page);
-      await expect(page.locator('#welkom img[alt="Top Banner"]')).toHaveScreenshot('logo.png', { animations: 'disabled' });
+      await expect(page.locator('#welkom img[alt="Irisabella Healing Praktijk logo"]')).toHaveScreenshot('logo.png', { animations: 'disabled' });
     });
   });
 });

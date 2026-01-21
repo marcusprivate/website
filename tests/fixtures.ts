@@ -40,11 +40,11 @@ export const NAV_LINKS = [
 ] as const;
 
 export const SLIDESHOW_IMAGES = [
-  'roze_zee.jpg',
-  'blauwe_zee.jpg',
-  'boom_water.jpeg',
-  'zee_strand_zon_onder.jpg',
-  'schuim.jpg',
+  'images/roze_zee.jpg',
+  'images/blauwe_zee.jpg',
+  'images/boom_water.jpeg',
+  'images/zee_strand_zon_onder.jpg',
+  'images/schuim.jpg',
 ] as const;
 
 // ============================================================================
@@ -90,6 +90,8 @@ export class NavigationComponent {
 
   async scrollToTop(): Promise<void> {
     await this.page.evaluate(() => window.scrollTo(0, 0));
+    // Wait for throttled scroll handler to process (100ms throttle + margin)
+    await this.page.waitForTimeout(150);
     await this.waitForNavVisible();
   }
 
@@ -261,7 +263,8 @@ export async function gotoWithSeededRandom(page: Page, path: string = '/'): Prom
 
 export async function scrollPage(page: Page, deltaY: number): Promise<void> {
   await page.evaluate((dy) => window.scrollBy(0, dy), deltaY);
-  await page.waitForTimeout(100);
+  // Wait for throttled scroll handler to process (100ms throttle + margin)
+  await page.waitForTimeout(150);
 }
 
 export async function waitForPageReady(page: Page): Promise<void> {

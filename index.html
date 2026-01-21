@@ -3,354 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Irisabella Healing Praktijk op Texel - Healing sessies voor rust, balans en herstel. Neem contact op voor een afspraak.">
     <title>Irisabella healing praktijk</title>
-    <!-- Externe stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Load custom font stylesheet -->
-    <link rel="stylesheet" href="fonts.css">
-    <!-- Interne CSS -->
-    <style>
-        body {
-            font-family: 'Gotham Rounded Medium', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f0f0f0;
-            scroll-behavior: smooth; 
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #5C2282;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Voeg deze regel toe */
-            z-index: 1000;
-            padding: 10px 0;
-            height: 55px; 
-            transition: top 0.3s; /* Smooth transition for hiding/showing */
-        }
-
-        .nav-hidden {
-            top: -80px; /* Hide navigation bar above the viewport */
-        }
-
-        /* Add these styles for the Hamburger Menu */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            position: absolute;
-            right: 20px;
-            z-index: 1001;
-        }
-
-        .bar {
-            height: 2px;
-            width: 24px;
-            background-color: #fff;
-            margin: 3px 0;
-            transition: 0.4s;
-            border-radius: 2px;
-        }
-
-        /* Hamburger Animation */
-        .menu-toggle.active .bar:nth-child(1) {
-            transform: translateY(5px) rotate(45deg);
-        }
-
-        .menu-toggle.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active .bar:nth-child(3) {
-            transform: translateY(-5px) rotate(-45deg);
-        }
-
-        .desktop-menu {
-            display: flex;
-            justify-content: center; 
-            width: 100%;
-        }
-
-        nav a {
-            color: #fff;
-            padding: 10px 15px;
-            margin: 5px 5px;
-            text-decoration: none;
-            background-color: #5C2282;
-            border-radius: 20px; 
-            transition: background-color 0.3s, box-shadow 0.3s; 
-        }
-
-        /* Wrap hover and active states in a media query */
-        @media (hover: hover) {
-            nav a:hover {
-                background-color: #F49300;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-            }
-            .testimonial-controls button:hover {
-                background: linear-gradient(135deg, #F49300, #F49300);
-                transform: scale(1.1);
-                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            }
-            .testimonial-controls button:active {
-                background: linear-gradient(135deg, #F49300, #F49300);
-                transform: scale(1.05);
-                box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-            }
-        }
-
-        header, section {
-            padding: 40px 20px; 
-            text-align: center;
-            margin-top: 20px; 
-            box-sizing: border-box;
-            scroll-margin-top: 80px; /* Offset for fixed navbar */
-        }
-
-        header {
-            background-color: #f7f7f7;
-        }
-
-        section {
-            background-color: #fff;
-            margin: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: background-color 0.5s;
-            box-sizing: border-box;
-        }
-
-        section:nth-child(even) {
-            background-color: #CAB2E0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px; 
-            box-sizing: border-box;
-        }
-
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        .slides {
-            display: none;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 1s;
-        }
-
-        .slides.active {
-            display: block;
-            opacity: 1;
-        }
-
-        @keyframes fade {
-            from {opacity: .4}
-            to {opacity: 1}
-        }
-
-        .fade {
-            animation-name: fade;
-            animation-duration: 2s;
-        }
-
-        @media (max-width: 600px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .desktop-menu {
-                display: none;
-                flex-direction: column;
-                width: 50%;
-                position: absolute;
-                top: 55px; /* Height of the nav bar */
-                right: 0;
-                background-color: #F9F5FC; /* Light lavender to blend better */
-                padding: 10px 0;
-                border-bottom-left-radius: 20px;
-                border-top-left-radius: 20px;
-                box-shadow: -5px 10px 20px rgba(0,0,0,0.08);
-            }
-
-            .desktop-menu.active {
-                display: flex;
-            }
-
-            .desktop-menu a {
-                margin: 5px 15px;
-                padding: 12px 20px;
-                text-align: center;
-                background-color: transparent;
-                color: #5C2282;
-                border-radius: 10px;
-                border: none;
-            }
-
-            .desktop-menu a:hover {
-                background-color: #F49300;
-                color: #fff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
-            
-            .container {
-                width: 90%;
-            }
-            
-            .section {
-                padding: 20px;
-            }
-            
-            nav {
-                display: flex; /* Ensure nav is displayed on mobile */
-            }
-            header, section {
-                padding: 10px 10px 20px; 
-                margin-top: 0; 
-            }
-            #welkom {
-                padding-top: 80px; 
-            }
-        }
-
-        .smaller-img {
-            width: 430px;
-            height: auto;
-            margin: 20px auto;
-            border-radius: 10px;
-        }
-
-        @media (max-width: 600px) {
-            .smaller-img {
-                width: 280px;
-            }
-        }
-
-        .contact-img {
-            width: 100%;
-            height: auto;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-
-        #wat-is-healing {
-            margin-top: 15px; 
-        }
-
-        /* Testimonials Styling */
-        .testimonial-wrapper {
-            position: relative;
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-            transition: min-height 0.3s ease-in-out;
-        }
-
-        .testimonial {
-            display: none;
-            padding: 20px;
-            background: #f7f7f7;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        
-        .testimonial.active {
-            display: block;
-        }
-
-        .testimonial-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-controls button {
-            background: linear-gradient(135deg, #F49300, #F49300);
-            color: #fff;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            margin: 0 15px;
-        }
-
-        .testimonial-controls button span {
-            position: relative;
-            top: -1px; /* Adjust this value to move the characters up or down */
-        }
-
-        @media (hover: hover) {
-            .testimonial-controls button:hover {
-                background: linear-gradient(135deg, #F49300, #F49300);
-                transform: scale(1.1);
-                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            }
-            .testimonial-controls button:active {
-                background: linear-gradient(135deg, #F49300, #F49300);
-                transform: scale(1.05);
-                box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-            }
-        }
-
-        /* Responsive Styling */
-        @media (max-width: 600px) {
-            .testimonial {
-                padding: 15px;
-            }
-            .testimonial-controls button {
-                padding: 8px 12px;
-            }
-        }
-
-        /* Apply Fonia Regular to all H2 headings with increased font size */
-        h2 {
-            font-family: 'Fonia Regular', sans-serif;
-            font-size: 1.6em; /* Adjust this value as needed */
-        }
-
-        .social-link-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .social-link-container i {
-            font-size: 1.5em; /* Maakt het icoon iets groter */
-            margin-right: 10px; /* Ruimte tussen icoon en tekst */
-            color: #333; /* Standaard tekstkleur */
-        }
-
-        .contact-link {
-            color: inherit; /* Gebruikt de tekstkleur van het bovenliggende element */
-            text-decoration: none; /* Verwijdert de onderstreping */
-            cursor: pointer; /* Behoudt de aanwijzer om aan te geven dat het klikbaar is */
-        }
-    </style>
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="fonts/gothamrnd_book.otf" as="font" type="font/opentype" crossorigin>
+    <link rel="preload" href="fonts/fonia_regular.ttf" as="font" type="font/truetype" crossorigin>
+    <!-- External stylesheets -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <nav>
-        <div class="menu-toggle" id="mobile-menu">
+    <!-- Skip navigation link for accessibility -->
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    
+    <nav aria-label="Hoofdnavigatie">
+        <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-expanded="false" aria-label="Menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -365,24 +32,26 @@
         </div>
     </nav>
 
-    <header id="welkom">
-        <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
-            <img src="Irisabella_Healing_Praktijk_RGB.png" alt="Top Banner" style="width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto;">
-            <p>Welkom op mijn website. Ik ben Irisabella Bakker en ik ben gepassioneerd om mensen te helpen via healing.</p>
-            <p>Of je nu op zoek bent naar rust, balans of herstel, ik sta voor je klaar. Samen werken we aan het herstellen van je energie en het vinden van de balans die je nodig hebt om weer helemaal in je kracht te staan.</p>
-            <p>Hier vind je alles over hoe ik je kan ondersteunen. Voel je vrij om contact met me op te nemen voor meer informatie of om een afspraak te maken.</p>
-        </div>
-    </header>
+    <main id="main-content">
+        <header id="welkom">
+            <div class="container header-container">
+                <h1 class="visually-hidden">Irisabella Healing Praktijk</h1>
+                <img src="images/Irisabella_Healing_Praktijk_RGB.png" alt="Irisabella Healing Praktijk logo" class="logo-img" width="600" height="171">
+                <p>Welkom op mijn website. Ik ben Irisabella Bakker en ik ben gepassioneerd om mensen te helpen via healing.</p>
+                <p>Of je nu op zoek bent naar rust, balans of herstel, ik sta voor je klaar. Samen werken we aan het herstellen van je energie en het vinden van de balans die je nodig hebt om weer helemaal in je kracht te staan.</p>
+                <p>Hier vind je alles over hoe ik je kan ondersteunen. Voel je vrij om contact met me op te nemen voor meer informatie of om een afspraak te maken.</p>
+            </div>
+        </header>
 
-    <div class="full-width-container">
-        <div class="slideshow-container">
-            <img src="roze_zee.jpg" class="slides active" alt="Roze Zee">
-            <img src="blauwe_zee.jpg" class="slides" alt="Blauwe Zee">
-            <img src="boom_water.jpeg" class="slides" alt="Boom bij Water">
-            <img src="zee_strand_zon_onder.jpg" class="slides" alt="Zee Strand Zonsondergang">
-            <img src="schuim.jpg" class="slides" alt="Schuim">
-        </div>
-    </div> 
+        <div class="full-width-container">
+            <div class="slideshow-container">
+                <img src="images/roze_zee.jpg" class="slides active" alt="Roze Zee" width="1200" height="400">
+                <img src="images/blauwe_zee.jpg" class="slides" alt="Blauwe Zee" width="1200" height="400">
+                <img src="images/boom_water.jpeg" class="slides" alt="Boom bij Water" width="1200" height="400">
+                <img src="images/zee_strand_zon_onder.jpg" class="slides" alt="Zee Strand Zonsondergang" width="1200" height="400">
+                <img src="images/schuim.jpg" class="slides" alt="Schuim" width="1200" height="400">
+            </div>
+        </div> 
 
     <section id="wat-is-healing">
         <div class="container">
@@ -410,12 +79,10 @@
             <p>Ik run mijn eigen bedrijf en ondersteun ondernemers met hun bedrijfsvoering. Hoewel mijn focus voornamelijk ligt op financiële ondersteuning, reikt mijn inzet vaak verder. Veel ondernemers kunnen, al dan niet tijdelijk, ook op andere gebieden wel wat hulp gebruiken. Wat ik vooral breng is rust; niet zozeer als ik bij je op bezoek ben misschien, maar zeker in je werkwijze. Ik houd van duidelijkheid en strakke lijnen, en zorg ervoor dat alles goed is geregeld, zodat jij overzicht hebt en kunt doen waar je goed in bent: ondernemen. Maar vergeet niet, we doen het samen.</p>
             <p>Ik geniet ervan om buiten te zijn, wandel graag langs de kust en ga het hele jaar door drie keer per week de zee in voor mijn fysieke en mentale gezondheid. Daarnaast zing ik al ruim 25 jaar in een a cappella groep van drie vrouwen. Muziek is voor mij een krachtige manier om energie door te geven en te ontvangen. Het brengt veel vreugde en vrolijkheid in mijn leven.</p>
             <p>Ik hecht veel waarde aan oprechte verbindingen en geloof in de kracht van positieve energie en intentie. Het is mijn doel om anderen te helpen hun innerlijke kracht te ontdekken en te gebruiken om een evenwichtiger en vervullender leven te leiden.</p>
-            <img src="irisabella.jpg" alt="Irisabella Bakker" class="smaller-img">
+            <img src="images/irisabella.jpg" alt="Irisabella Bakker" class="smaller-img" loading="lazy">
         </div>
     </section>
     
-
-    <!-- Aangepaste Testimonials Sectie -->
     <section id="reviews">
         <div class="container">
             <h2>Reviews</h2>
@@ -423,7 +90,7 @@
                 <button id="prev-testimonial" aria-label="Previous Testimonial"><span>&laquo;</span></button>
                 <button id="next-testimonial" aria-label="Next Testimonial"><span>&raquo;</span></button>
             </div>
-            <div class="testimonial-wrapper">
+            <div class="testimonial-wrapper" aria-live="polite" aria-atomic="true">
                 <!-- Testimonials will be loaded here via JavaScript -->
             </div>
         </div>
@@ -438,238 +105,19 @@
             <p><strong>Adres:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Ruijslaan+90,+1796+AZ,+De+Koog" target="_blank" rel="noopener noreferrer" class="contact-link">Ruijslaan 90, 1796 AZ, De Koog</a></p>
             <div class="social-link-container">
                 <a href="https://www.instagram.com/irisabella1" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Instagram: Irisabella Healing Texel">
-                    <i class="fab fa-instagram"></i>Irisabella Healing Texel
+                    <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                    Irisabella Healing Texel
                 </a>
             </div>
-            <div class="container" style="padding-top: 20px;">
-                <img src="Irisabella_Healing_Praktijk_zwart.png" alt="Top Banner" style="width: 100%; max-width: 270px; height: auto; display: block; margin: 0 auto;">
+            <div class="container contact-footer-container">
+                <img src="images/Irisabella_Healing_Praktijk_zwart.png" alt="Irisabella Healing Praktijk logo" class="logo-img-small" loading="lazy">
             </div>
-            <!-- <img src="contact.jpg" alt="Contact" class="contact-img"> -->
         </div>  
     </section>
+    </main>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            // Load testimonials from YAML
-            let testimonials = [];
-            try {
-                const response = await fetch('testimonials.yaml');
-                const yamlText = await response.text();
-                testimonials = jsyaml.load(yamlText);
-            } catch (error) {
-                console.error('Error loading testimonials:', error);
-            }
-            // Mobile Menu Toggle
-            const menuToggle = document.getElementById('mobile-menu');
-            const navMenu = document.querySelector('.desktop-menu');
-
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    navMenu.classList.toggle('active');
-                    menuToggle.classList.toggle('active');
-                });
-            }
-
-            // Close mobile menu when a link is clicked
-            const navLinks = document.querySelectorAll('.desktop-menu a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                });
-            });
-
-            // Slideshow
-            let slideIndex = 0;
-            showSlides();
-
-            function showSlides() {
-                let slides = document.getElementsByClassName("slides");
-                for (let i = 0; i < slides.length; i++) {
-                    slides[i].classList.remove("active");
-                }
-                slideIndex++;
-                if (slideIndex > slides.length) {slideIndex = 1}
-                slides[slideIndex-1].classList.add("active");
-                setTimeout(showSlides, 10000); 
-            }
-
-            // Testimonials
-            let currentTestimonialIndex = 0;
-            let testimonialInterval;
-
-            if (testimonials.length > 0) {
-                shuffleArray(testimonials);
-                renderTestimonials();
-                setWrapperHeight();
-                startTestimonialInterval();
-            }
-
-            function renderTestimonials() {
-                const wrapper = document.querySelector('.testimonial-wrapper');
-                wrapper.innerHTML = ''; // Clear existing content
-
-                testimonials.forEach((testimonialData, index) => {
-                    const testimonialDiv = document.createElement('div');
-                    testimonialDiv.classList.add('testimonial');
-                    if (index === 0) testimonialDiv.classList.add('active');
-
-                    // Split multiline text by double newlines into paragraphs
-                    const paragraphs = testimonialData.tekst.trim().split(/\n\n+/);
-                    paragraphs.forEach(paragraph => {
-                        const p = document.createElement('p');
-                        p.textContent = paragraph;
-                        testimonialDiv.appendChild(p);
-                    });
-
-                    const h3 = document.createElement('h3');
-                    h3.textContent = `- ${testimonialData.naam}`;
-                    testimonialDiv.appendChild(h3);
-
-                    wrapper.appendChild(testimonialDiv);
-                });
-            }
-
-            function setWrapperHeight() {
-                const wrapper = document.querySelector('.testimonial-wrapper');
-                const testimonialElements = document.querySelectorAll('.testimonial-wrapper .testimonial');
-                let maxHeight = 0;
-
-                // 1. Prepare elements for measurement (Write)
-                testimonialElements.forEach(testimonial => {
-                    if (!testimonial.classList.contains('active')) {
-                        testimonial.style.position = 'absolute';
-                        testimonial.style.visibility = 'hidden';
-                        testimonial.style.display = 'block';
-                        testimonial.style.width = '100%'; 
-                        testimonial.style.boxSizing = 'border-box';
-                    }
-                });
-
-                // 2. Measure heights (Read)
-                testimonialElements.forEach(testimonial => {
-                    if (testimonial.offsetHeight > maxHeight) {
-                        maxHeight = testimonial.offsetHeight;
-                    }
-                });
-
-                // 3. Reset styles (Write)
-                testimonialElements.forEach(testimonial => {
-                    if (!testimonial.classList.contains('active')) {
-                        testimonial.style.position = '';
-                        testimonial.style.visibility = '';
-                        testimonial.style.display = '';
-                        testimonial.style.width = '';
-                        testimonial.style.boxSizing = '';
-                    }
-                });
-
-                // Set the wrapper's min-height
-                if (wrapper) {
-                    wrapper.style.minHeight = `${maxHeight}px`;
-                }
-            }
-
-            // Set height on window resize
-            window.addEventListener('resize', setWrapperHeight);
-
-            function startTestimonialInterval() {
-                testimonialInterval = setInterval(function() {
-                    showTestimonial(1);
-                }, 10000); // Wissel elke 10 seconden
-            }
-
-            // Handle controls
-            document.getElementById('next-testimonial').addEventListener('click', function() {
-                showTestimonial(1);
-            });
-
-            document.getElementById('prev-testimonial').addEventListener('click', function() {
-                showTestimonial(-1);
-            });
-
-            // Swipe support for mobile devices
-            let startX = 0;
-            let startY = 0;
-            let endX = 0;
-            let endY = 0;
-
-            const testimonialWrapper = document.querySelector('.testimonial-wrapper');
-            testimonialWrapper.addEventListener('touchstart', function(event) {
-                startX = event.touches[0].clientX;
-                startY = event.touches[0].clientY;
-            }, false);
-
-            testimonialWrapper.addEventListener('touchend', function(event) {
-                endX = event.changedTouches[0].clientX;
-                endY = event.changedTouches[0].clientY;
-                handleGesture();
-            }, false);
-
-            function handleGesture() {
-                let xDiff = startX - endX;
-                let yDiff = startY - endY;
-
-                // Check if horizontal swipe is dominant
-                if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                    if (Math.abs(xDiff) > 50) {
-                        if (xDiff > 0) {
-                            // Swiped left
-                            showTestimonial(1);
-                        } else {
-                            // Swiped right
-                            showTestimonial(-1);
-                        }
-                    }
-                }
-            }
-
-            function showTestimonial(direction) {
-                const testimonialElements = document.querySelectorAll('.testimonial-wrapper .testimonial');
-                if (testimonialElements.length === 0) return;
-                
-                testimonialElements[currentTestimonialIndex].classList.remove('active');
-                currentTestimonialIndex = (currentTestimonialIndex + direction + testimonialElements.length) % testimonialElements.length;
-                testimonialElements[currentTestimonialIndex].classList.add('active');
-                
-                resetTestimonialInterval();
-            }
-
-            function shuffleArray(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    let j = Math.floor(Math.random() * (i + 1));
-                    // Swap elements
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            }
-
-            function resetTestimonialInterval() {
-                clearInterval(testimonialInterval);
-                startTestimonialInterval();
-            }
-
-            // Smart Navbar Logic
-            let lastScrollTop = 0;
-            const nav = document.querySelector('nav');
-
-            window.addEventListener('scroll', function() {
-                // Don't hide if mobile menu is open
-                if (navMenu.classList.contains('active')) return;
-
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > lastScrollTop && scrollTop > 75) {
-                    // Scrolling down and past the navbar height
-                    nav.classList.add('nav-hidden');
-                } else {
-                    // Scrolling up
-                    nav.classList.remove('nav-hidden');
-                }
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
-            });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" defer></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

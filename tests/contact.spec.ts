@@ -35,8 +35,8 @@ test.describe('Contact Links', () => {
     await expect(contact.instagramLink).toHaveAttribute('rel', 'noopener noreferrer');
     await expect(contact.instagramLink).toHaveAttribute('aria-label', 'Instagram: Irisabella Healing Texel');
     
-    // Icon exists
-    await expect(contact.instagramLink.locator('i.fab.fa-instagram')).toBeVisible();
+    // SVG icon exists
+    await expect(contact.instagramLink.locator('svg.instagram-icon')).toBeVisible();
   });
 
   test('section structure', async ({ contact }) => {

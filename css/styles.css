@@ -1,0 +1,437 @@
+/* ==========================================================================
+   CSS Custom Properties (Colors & Spacing)
+   ========================================================================== */
+:root {
+    color-scheme: light;
+    
+    --color-primary: #5C2282;
+    --color-accent: #F49300;
+    --color-text: #333333;
+    --color-background: #f0f0f0;
+    --color-white: #fff;
+    --color-section-alt: #CAB2E0;
+    --color-testimonial-bg: #f7f7f7;
+    --color-mobile-menu-bg: #F9F5FC;
+    
+    --nav-height: 55px;
+    --nav-hide-offset: -80px;
+    --border-radius: 10px;
+    --border-radius-pill: 20px;
+    --transition-fast: 0.3s;
+    --transition-medium: 0.5s;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gotham Rounded Medium', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    scroll-behavior: smooth; 
+}
+
+/* Skip navigation link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px 16px;
+    z-index: 1100;
+    text-decoration: none;
+    border-radius: 0 0 var(--border-radius) 0;
+    transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Instagram icon */
+.instagram-icon {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+h2 {
+    font-family: 'Fonia Regular', sans-serif;
+    font-size: 1.6em;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 10px 0;
+    height: var(--nav-height);
+    transition: top var(--transition-fast);
+}
+
+.nav-hidden {
+    top: var(--nav-hide-offset);
+}
+
+nav a {
+    color: var(--color-white);
+    padding: 10px 15px;
+    margin: 5px 5px;
+    text-decoration: none;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-pill);
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+    white-space: nowrap;
+}
+
+.desktop-menu {
+    display: flex;
+    justify-content: center; 
+    width: 100%;
+}
+
+/* ==========================================================================
+   Hamburger Menu
+   ========================================================================== */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    z-index: 1001;
+}
+
+.bar {
+    height: 2px;
+    width: 24px;
+    background-color: var(--color-white);
+    margin: 3px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+/* Hamburger Animation */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Layout: Header & Sections
+   ========================================================================== */
+header, section {
+    padding: 40px 20px; 
+    text-align: center;
+    margin-top: 20px; 
+    scroll-margin-top: 80px;
+}
+
+header {
+    background-color: var(--color-testimonial-bg);
+}
+
+section {
+    background-color: var(--color-white);
+    margin: 10px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color var(--transition-medium);
+    box-sizing: border-box;
+}
+
+section:nth-of-type(odd) {
+    background-color: var(--color-section-alt);
+}
+
+#wat-is-healing {
+    margin-top: 15px; 
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+/* Header container with specific padding */
+.header-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Contact footer container */
+.contact-footer-container {
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   Images
+   ========================================================================== */
+.logo-img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.logo-img-small {
+    width: 100%;
+    max-width: 270px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.smaller-img {
+    width: 430px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: var(--border-radius);
+}
+
+/* ==========================================================================
+   Slideshow
+   ========================================================================== */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.slides.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Testimonials
+   ========================================================================== */
+.testimonial-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: min-height var(--transition-fast) ease-in-out;
+}
+
+.testimonial {
+    display: none;
+    padding: 20px;
+    background: var(--color-testimonial-bg);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.testimonial.active {
+    display: block;
+}
+
+.testimonial-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.testimonial-controls button {
+    background: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background var(--transition-fast) ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 0 15px;
+}
+
+.testimonial-controls button span {
+    position: relative;
+    top: -1px;
+}
+
+/* ==========================================================================
+   Contact & Social Links
+   ========================================================================== */
+.social-link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.social-link-container i {
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: var(--color-text);
+}
+
+.contact-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   Hover States (only for devices that support hover)
+   ========================================================================== */
+@media (hover: hover) {
+    nav a:hover {
+        background-color: var(--color-accent);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    }
+
+    .testimonial-controls button:hover {
+        background: var(--color-accent);
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .testimonial-controls button:active {
+        background: var(--color-accent);
+        transform: scale(1.05);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* ==========================================================================
+   Responsive Styles (Mobile: max-width 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Navigation */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .desktop-menu {
+        display: none;
+        flex-direction: column;
+        width: 50%;
+        position: absolute;
+        top: 55px;
+        right: 0;
+        background-color: var(--color-mobile-menu-bg);
+        padding: 10px 0;
+        border-bottom-left-radius: var(--border-radius-pill);
+        border-top-left-radius: var(--border-radius-pill);
+        box-shadow: -5px 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .desktop-menu.active {
+        display: flex;
+    }
+
+    .desktop-menu a {
+        margin: 5px 15px;
+        padding: 12px 20px;
+        text-align: center;
+        background-color: transparent;
+        color: var(--color-primary);
+        border-radius: var(--border-radius);
+        border: none;
+    }
+
+    .desktop-menu a:hover {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Layout */
+    nav {
+        display: flex;
+    }
+
+    header, section {
+        padding: 10px 10px 20px; 
+        margin-top: 0; 
+    }
+
+    #welkom {
+        padding-top: 80px; 
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    /* Images */
+    .smaller-img {
+        width: 280px;
+    }
+
+    /* Testimonials */
+    .testimonial {
+        padding: 15px;
+    }
+
+    .testimonial-controls button {
+        padding: 8px 12px;
+    }
+}
+
+/* ==========================================================================
+   Reduced Motion Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

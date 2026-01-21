@@ -43,17 +43,21 @@ test.describe('Page Structure', () => {
   });
 
   test('external resources load', async ({ page }) => {
-    // Font Awesome CSS loaded
-    const fontAwesome = page.locator('link[href*="font-awesome"]');
-    await expect(fontAwesome).toHaveCount(1);
-    
     // js-yaml script loaded
     const jsYaml = page.locator('script[src*="js-yaml"]');
     await expect(jsYaml).toHaveCount(1);
     
     // Custom fonts CSS
-    const fontsCSS = page.locator('link[href="fonts.css"]');
+    const fontsCSS = page.locator('link[href="css/fonts.css"]');
     await expect(fontsCSS).toHaveCount(1);
+
+    // Main stylesheet
+    const stylesCSS = page.locator('link[href="css/styles.css"]');
+    await expect(stylesCSS).toHaveCount(1);
+
+    // Main JavaScript
+    const mainJS = page.locator('script[src="js/main.js"]');
+    await expect(mainJS).toHaveCount(1);
   });
 });
 
@@ -75,12 +79,13 @@ test.describe('Assets Loading', () => {
 
   test('logo images load', async ({ page }) => {
     const logos = [
-      { selector: '#welkom img[alt="Top Banner"]', desc: 'Header logo' },
-      { selector: '#contact img[alt="Top Banner"]', desc: 'Footer logo' },
+      { selector: '#welkom img[alt="Irisabella Healing Praktijk logo"]', desc: 'Header logo' },
+      { selector: '#contact img[alt="Irisabella Healing Praktijk logo"]', desc: 'Footer logo' },
     ];
 
     for (const logo of logos) {
       const img = page.locator(logo.selector);
+      await img.scrollIntoViewIfNeeded();
       await expect(img, logo.desc).toBeVisible();
       
       const loaded = await img.evaluate((el: HTMLImageElement) => el.naturalWidth > 0);
@@ -90,6 +95,7 @@ test.describe('Assets Loading', () => {
 
   test('profile image loads', async ({ page }) => {
     const img = page.locator('img[alt="Irisabella Bakker"]');
+    await img.scrollIntoViewIfNeeded();
     await expect(img).toBeVisible();
     
     const loaded = await img.evaluate((el: HTMLImageElement) => el.naturalWidth > 0);
@@ -201,6 +207,9 @@ test.describe('Accessibility', () => {
     const h2s = page.locator('h2');
     const h2Count = await h2s.count();
     expect(h2Count).toBe(5); // wat-is-healing, mijn-aanpak, wie-ben-ik, reviews, contact
+    
+    // Wait for testimonials to load and render
+    await expect(page.locator('.testimonial').first()).toBeVisible({ timeout: 5000 });
     
     // Testimonial author names are h3
     const h3s = page.locator('.testimonial h3');

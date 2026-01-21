@@ -1,14 +1,16 @@
 @font-face {
     font-family: 'Gotham Rounded Medium';
-    src: url('gothamrnd_book.otf') format('opentype');
+    src: url('../fonts/gothamrnd_book.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 /* H2 headings */
 @font-face {
     font-family: 'Fonia Regular';
-    src: url('fonia_fegular.ttf') format('truetype');
+    src: url('../fonts/fonia_regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
