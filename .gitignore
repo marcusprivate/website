@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Playwright
+playwright-report/
+test-results/
+
+# macOS
+.DS_Store
