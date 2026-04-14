@@ -283,11 +283,15 @@ section:nth-of-type(odd) {
 }
 
 .testimonial-controls button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: var(--color-accent);
     color: var(--color-white);
     border: none;
     width: 40px;
     height: 40px;
+    padding: 0;
     border-radius: 50%;
     cursor: pointer;
     font-size: 18px;

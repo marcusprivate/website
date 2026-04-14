@@ -20,6 +20,10 @@ test.describe('Page Structure', () => {
     // Charset
     const charset = page.locator('meta[charset]');
     await expect(charset).toHaveAttribute('charset', 'UTF-8');
+
+    // Favicon links
+    const faviconPng = page.locator('link[rel="icon"][type="image/png"]');
+    await expect(faviconPng).toHaveAttribute('href', 'favicon.png');
   });
 
   test('all sections exist with correct headings', async ({ page }) => {
@@ -58,6 +62,16 @@ test.describe('Page Structure', () => {
     // Main JavaScript
     const mainJS = page.locator('script[src="js/main.js"]');
     await expect(mainJS).toHaveCount(1);
+
+    const faviconResources = ['favicon.png'];
+    for (const href of faviconResources) {
+      const loaded = await page.evaluate(async (path) => {
+        const response = await fetch(path);
+        return response.ok;
+      }, href);
+
+      expect(loaded, `${href} should load`).toBe(true);
+    }
   });
 });
 

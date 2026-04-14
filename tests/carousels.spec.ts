@@ -1,5 +1,7 @@
 import { test, expect, SLIDESHOW_IMAGES, CONFIG } from './fixtures';
 
+const SLIDESHOW_TICK_MS = CONFIG.timing.slideshow + CONFIG.timing.animationSettle;
+
 test.describe('Slideshow', () => {
   test('all images exist and only one active at a time', async ({ page, slideshow }) => {
     await page.goto('/');
@@ -15,20 +17,21 @@ test.describe('Slideshow', () => {
     
     await slideshow.expectActiveImage(SLIDESHOW_IMAGES[0]);
     
-    await page.clock.fastForward(CONFIG.timing.slideshow);
+    await page.clock.fastForward(SLIDESHOW_TICK_MS);
     await slideshow.expectActiveImage(SLIDESHOW_IMAGES[1]);
     
-    await page.clock.fastForward(CONFIG.timing.slideshow);
+    await page.clock.fastForward(SLIDESHOW_TICK_MS);
     await slideshow.expectActiveImage(SLIDESHOW_IMAGES[2]);
   });
 
   test('cycles back to first after last', async ({ page, slideshow }) => {
     await page.clock.install();
     await page.goto('/');
+    await slideshow.expectActiveImage(SLIDESHOW_IMAGES[0]);
     
     // Advance through all 5 images
     for (let i = 1; i <= 5; i++) {
-      await page.clock.fastForward(CONFIG.timing.slideshow);
+      await page.clock.fastForward(SLIDESHOW_TICK_MS);
       const expectedIndex = i % 5;
       await slideshow.expectActiveImage(SLIDESHOW_IMAGES[expectedIndex]);
       await slideshow.expectSingleActive();
@@ -57,18 +60,19 @@ test.describe('Testimonials', () => {
     await page.goto('/');
     await testimonials.waitForLoad();
     
-    const initialAuthor = await testimonials.getActiveAuthor();
+    const initialIndex = await testimonials.getActiveIndex();
     
     await testimonials.next();
-    await page.waitForTimeout(100); // Wait for DOM update
-    const afterNext = await testimonials.getActiveAuthor();
-    expect(afterNext).not.toBe(initialAuthor);
+    await expect
+      .poll(() => testimonials.getActiveIndex())
+      .not.toBe(initialIndex);
+    const afterNextIndex = await testimonials.getActiveIndex();
     
     // Prev should return to previous testimonial (the initial one)
     await testimonials.prev();
-    await page.waitForTimeout(100); // Wait for DOM update
-    const afterPrev = await testimonials.getActiveAuthor();
-    expect(afterPrev).toBe(initialAuthor);
+    await expect
+      .poll(() => testimonials.getActiveIndex())
+      .toBe(initialIndex);
   });
 
   test('auto-advances and resets on manual navigation', async ({ page, testimonials }) => {
@@ -77,23 +81,24 @@ test.describe('Testimonials', () => {
     await page.goto('/');
     await testimonials.waitForLoad();
     
-    const initial = await testimonials.getActiveAuthor();
+    const initialIndex = await testimonials.getActiveIndex();
     
     // Auto-advance after 10s - use fastForward for consistency with slideshow tests
     await page.clock.fastForward(CONFIG.timing.slideshow);
-    expect(await testimonials.getActiveAuthor()).not.toBe(initial);
+    expect(await testimonials.getActiveIndex()).not.toBe(initialIndex);
     
     // Manual nav resets timer
-    const beforeManual = await testimonials.getActiveAuthor();
+    const beforeManualIndex = await testimonials.getActiveIndex();
     await page.clock.fastForward(8000);
     await testimonials.next();
-    const afterManual = await testimonials.getActiveAuthor();
+    const afterManualIndex = await testimonials.getActiveIndex();
+    expect(afterManualIndex).not.toBe(beforeManualIndex);
     
     await page.clock.fastForward(8000); // Not enough if timer reset
-    expect(await testimonials.getActiveAuthor()).toBe(afterManual);
+    expect(await testimonials.getActiveIndex()).toBe(afterManualIndex);
     
     await page.clock.fastForward(2000); // Now it should advance
-    expect(await testimonials.getActiveAuthor()).not.toBe(afterManual);
+    expect(await testimonials.getActiveIndex()).not.toBe(afterManualIndex);
   });
 
   test('control buttons have ARIA labels', async ({ page, testimonials }) => {
@@ -112,15 +117,17 @@ test.describe('Testimonials Touch', () => {
     await page.goto('/');
     await testimonials.waitForLoad();
     
-    const initial = await testimonials.getActiveAuthor();
+    const initialIndex = await testimonials.getActiveIndex();
     
     await testimonials.next();
-    await page.waitForTimeout(CONFIG.timing.animationSettle);
-    expect(await testimonials.getActiveAuthor()).not.toBe(initial);
+    await expect
+      .poll(() => testimonials.getActiveIndex())
+      .not.toBe(initialIndex);
     
-    const second = await testimonials.getActiveAuthor();
+    const secondIndex = await testimonials.getActiveIndex();
     await testimonials.prev();
-    await page.waitForTimeout(CONFIG.timing.animationSettle);
-    expect(await testimonials.getActiveAuthor()).not.toBe(second);
+    await expect
+      .poll(() => testimonials.getActiveIndex())
+      .not.toBe(secondIndex);
   });
 });

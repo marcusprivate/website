@@ -166,11 +166,21 @@ export class TestimonialsComponent {
     return this.active.locator('h3').textContent();
   }
 
+  async getActiveIndex(): Promise<number> {
+    return this.testimonials.evaluateAll(nodes =>
+      nodes.findIndex(node => node.classList.contains('active'))
+    );
+  }
+
   async next(): Promise<void> {
+    await this.nextButton.scrollIntoViewIfNeeded();
+    await this.page.waitForTimeout(CONFIG.timing.animationSettle);
     await this.nextButton.click();
   }
 
   async prev(): Promise<void> {
+    await this.prevButton.scrollIntoViewIfNeeded();
+    await this.page.waitForTimeout(CONFIG.timing.animationSettle);
     await this.prevButton.click();
   }
 
