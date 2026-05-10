@@ -50,6 +50,11 @@ test.describe('Page Structure', () => {
     // js-yaml script loaded
     const jsYaml = page.locator('script[src*="js-yaml"]');
     await expect(jsYaml).toHaveCount(1);
+
+    // GoatCounter analytics script loaded with correct endpoint
+    const goatCounter = page.locator('script[data-goatcounter="https://healing.goatcounter.com/count"]');
+    await expect(goatCounter).toHaveCount(1);
+    await expect(goatCounter).toHaveAttribute('src', /gc\.zgo\.at\/count\.js$/);
     
     // Custom fonts CSS
     const fontsCSS = page.locator('link[href="css/fonts.css"]');
