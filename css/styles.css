@@ -258,6 +258,7 @@ section:nth-of-type(odd) {
 .testimonial-wrapper {
     position: relative;
     overflow: hidden;
+    touch-action: pan-y;
     max-width: 800px;
     margin: 0 auto;
     transition: min-height var(--transition-fast) ease-in-out;

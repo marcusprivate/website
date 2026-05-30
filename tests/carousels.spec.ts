@@ -1,6 +1,67 @@
 import { test, expect, SLIDESHOW_IMAGES, CONFIG } from './fixtures';
+import type { Page } from '@playwright/test';
 
 const SLIDESHOW_TICK_MS = CONFIG.timing.slideshow + CONFIG.timing.animationSettle;
+
+async function dispatchTouchSwipe(
+  page: Page,
+  start: { x: number; y: number },
+  end: { x: number; y: number },
+  steps = 6
+): Promise<void> {
+  const client = await page.context().newCDPSession(page);
+
+  await client.send('Input.dispatchTouchEvent', {
+    type: 'touchStart',
+    touchPoints: [{ x: start.x, y: start.y }],
+  });
+
+  for (let i = 1; i <= steps; i++) {
+    const progress = i / steps;
+    await client.send('Input.dispatchTouchEvent', {
+      type: 'touchMove',
+      touchPoints: [{
+        x: start.x + (end.x - start.x) * progress,
+        y: start.y + (end.y - start.y) * progress,
+      }],
+    });
+  }
+
+  await client.send('Input.dispatchTouchEvent', {
+    type: 'touchEnd',
+    touchPoints: [],
+  });
+
+  await client.detach();
+}
+
+async function stubExternalScripts(page: Page): Promise<void> {
+  await page.route('https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js', route => route.fulfill({
+    contentType: 'application/javascript',
+    body: `
+      window.jsyaml = {
+        load(yaml) {
+          return yaml
+            .split(/\\n(?=- tekst: \\|)/)
+            .filter(Boolean)
+            .map(block => {
+              const textMatch = block.match(/- tekst: \\|\\n([\\s\\S]*?)\\n  naam:/);
+              const nameMatch = block.match(/\\n  naam:\\s*(.*)/);
+              return {
+                tekst: textMatch ? textMatch[1].replace(/^ {4}/gm, '').trim() : '',
+                naam: nameMatch ? nameMatch[1].trim() : ''
+              };
+            });
+        }
+      };
+    `,
+  }));
+
+  await page.route('**/gc.zgo.at/count.js', route => route.fulfill({
+    contentType: 'application/javascript',
+    body: '',
+  }));
+}
 
 test.describe('Slideshow', () => {
   test('all images exist and only one active at a time', async ({ page, slideshow }) => {
@@ -113,21 +174,37 @@ test.describe('Testimonials', () => {
 test.describe('Testimonials Touch', () => {
   test.skip(({ browserName }) => browserName !== 'chromium', 'Touch tests only on Chromium');
 
-  test('mobile navigation works', async ({ page, testimonials, mobile }) => {
-    await page.goto('/');
+  test('mobile horizontal swipe changes testimonials without vertical page drift', async ({ page, testimonials, mobile }) => {
+    await stubExternalScripts(page);
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await testimonials.waitForLoad();
-    
+
+    await testimonials.wrapper.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(CONFIG.timing.scrollSettle);
+
+    const wrapperBox = await testimonials.wrapper.boundingBox();
+    expect(wrapperBox).not.toBeNull();
+
     const initialIndex = await testimonials.getActiveIndex();
-    
-    await testimonials.next();
+    const initialScrollY = await page.evaluate(() => window.scrollY);
+
+    await dispatchTouchSwipe(
+      page,
+      {
+        x: wrapperBox!.x + wrapperBox!.width - 32,
+        y: wrapperBox!.y + wrapperBox!.height / 2,
+      },
+      {
+        x: wrapperBox!.x + 32,
+        y: wrapperBox!.y + wrapperBox!.height / 2 + 30,
+      }
+    );
+
     await expect
       .poll(() => testimonials.getActiveIndex())
       .not.toBe(initialIndex);
-    
-    const secondIndex = await testimonials.getActiveIndex();
-    await testimonials.prev();
-    await expect
-      .poll(() => testimonials.getActiveIndex())
-      .not.toBe(secondIndex);
+
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    expect(Math.abs(finalScrollY - initialScrollY)).toBeLessThanOrEqual(2);
   });
 });

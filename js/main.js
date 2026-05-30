@@ -14,6 +14,7 @@
 const SLIDESHOW_INTERVAL_MS = 10000;
 const TESTIMONIAL_INTERVAL_MS = 10000;
 const SWIPE_THRESHOLD_PX = 50;
+const SWIPE_INTENT_THRESHOLD_PX = 8;
 const NAVBAR_HIDE_THRESHOLD_PX = 75;
 const DEBOUNCE_DELAY_MS = 150;
 const THROTTLE_DELAY_MS = 100;
@@ -258,6 +259,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     let startY = 0;
     let endX = 0;
     let endY = 0;
+    let isHorizontalSwipe = false;
+    let isVerticalScroll = false;
 
     const testimonialWrapper = document.querySelector('.testimonial-wrapper');
     
@@ -265,13 +268,40 @@ document.addEventListener("DOMContentLoaded", async function() {
         testimonialWrapper.addEventListener('touchstart', function(event) {
             startX = event.touches[0].clientX;
             startY = event.touches[0].clientY;
+            endX = startX;
+            endY = startY;
+            isHorizontalSwipe = false;
+            isVerticalScroll = false;
         }, false);
+
+        testimonialWrapper.addEventListener('touchmove', function(event) {
+            if (event.touches.length === 0) return;
+
+            endX = event.touches[0].clientX;
+            endY = event.touches[0].clientY;
+
+            const xDiff = startX - endX;
+            const yDiff = startY - endY;
+            const absXDiff = Math.abs(xDiff);
+            const absYDiff = Math.abs(yDiff);
+
+            if (!isHorizontalSwipe && !isVerticalScroll && Math.max(absXDiff, absYDiff) > SWIPE_INTENT_THRESHOLD_PX) {
+                isHorizontalSwipe = absXDiff > absYDiff;
+                isVerticalScroll = !isHorizontalSwipe;
+            }
+
+            if (isHorizontalSwipe && event.cancelable) {
+                event.preventDefault();
+            }
+        }, { passive: false });
 
         testimonialWrapper.addEventListener('touchend', function(event) {
             endX = event.changedTouches[0].clientX;
             endY = event.changedTouches[0].clientY;
             handleGesture();
         }, false);
+
+        testimonialWrapper.addEventListener('touchcancel', resetSwipeGesture, false);
     }
 
     function handleGesture() {
@@ -288,6 +318,13 @@ document.addEventListener("DOMContentLoaded", async function() {
                 }
             }
         }
+
+        resetSwipeGesture();
+    }
+
+    function resetSwipeGesture() {
+        isHorizontalSwipe = false;
+        isVerticalScroll = false;
     }
 
     // ==========================================================================
