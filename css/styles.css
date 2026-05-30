@@ -412,6 +412,7 @@ section:nth-of-type(odd) {
 
     .container {
         width: 90%;
+        padding: 10px;
     }
 
     /* Images */
