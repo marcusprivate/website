@@ -1,7 +1,7 @@
 {
   "name": "healing-website-tests",
   "version": "1.0.0",
-  "description": "Functional and visual testing suite for Irisabella Healing Praktijk website",
+  "description": "Functional and visual testing suite for Irisabella Healing Texel website",
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",

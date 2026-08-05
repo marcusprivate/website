@@ -1,5 +1,5 @@
 /**
- * Irisabella Healing Praktijk - Main JavaScript
+ * Irisabella Healing Texel - Main JavaScript
  * 
  * Modules:
  * - Mobile Menu

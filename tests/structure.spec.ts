@@ -7,7 +7,7 @@ test.describe('Page Structure', () => {
 
   test('page meta and SEO', async ({ page }) => {
     // Title
-    await expect(page).toHaveTitle('Irisabella healing praktijk');
+    await expect(page).toHaveTitle('Irisabella Healing Texel');
     
     // Language
     const html = page.locator('html');
@@ -98,8 +98,8 @@ test.describe('Assets Loading', () => {
 
   test('logo images load', async ({ page }) => {
     const logos = [
-      { selector: '#welkom img[alt="Irisabella Healing Praktijk logo"]', desc: 'Header logo' },
-      { selector: '#contact img[alt="Irisabella Healing Praktijk logo"]', desc: 'Footer logo' },
+      { selector: '#welkom img[alt="Irisabella Healing Texel logo"]', desc: 'Header logo' },
+      { selector: '#contact img[alt="Irisabella Healing Texel logo"]', desc: 'Footer logo' },
     ];
 
     for (const logo of logos) {
