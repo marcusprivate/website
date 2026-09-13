@@ -7,7 +7,8 @@ if (typeof SimplybookWidget === 'function') {
         theme: 'simple_beauty_theme',
         theme_settings: {
             sb_base_color: '#5C2282',
-            header_color: '#f2f2f2',
+            // Match the purple navigation bar used on irisabella.nl.
+            header_color: '#5C2282',
             body_bg_color: '#f2f2f2',
             dark_font_color: '#333333',
             light_font_color: '#ffffff',
