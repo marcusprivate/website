@@ -57,17 +57,7 @@ function throttle(func, limit) {
 }
 
 document.addEventListener("DOMContentLoaded", async function() {
-    // ==========================================================================
-    // Testimonials Loading
-    // ==========================================================================
     let testimonials = [];
-    try {
-        const response = await fetch('data/testimonials.yaml');
-        const yamlText = await response.text();
-        testimonials = jsyaml.load(yamlText);
-    } catch (error) {
-        console.error('Error loading testimonials:', error);
-    }
 
     // ==========================================================================
     // Mobile Menu
@@ -227,14 +217,6 @@ document.addEventListener("DOMContentLoaded", async function() {
         startTestimonialInterval();
     }
 
-    // Initialize testimonials if loaded
-    if (testimonials.length > 0) {
-        shuffleArray(testimonials);
-        renderTestimonials();
-        setWrapperHeight();
-        startTestimonialInterval();
-    }
-
     // Set height on window resize (debounced)
     window.addEventListener('resize', debounce(setWrapperHeight, DEBOUNCE_DELAY_MS));
 
@@ -354,5 +336,24 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     if (nav) {
         window.addEventListener('scroll', handleScroll);
+    }
+
+    // ==========================================================================
+    // Testimonials Loading
+    // ==========================================================================
+    // Enable the independent controls before waiting for the reviews request.
+    try {
+        const response = await fetch('data/testimonials.yaml');
+        const yamlText = await response.text();
+        testimonials = jsyaml.load(yamlText);
+    } catch (error) {
+        console.error('Error loading testimonials:', error);
+    }
+
+    if (testimonials.length > 0) {
+        shuffleArray(testimonials);
+        renderTestimonials();
+        setWrapperHeight();
+        startTestimonialInterval();
     }
 });
