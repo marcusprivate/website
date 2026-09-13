@@ -118,7 +118,49 @@ nav a {
 .desktop-menu {
     display: flex;
     justify-content: center; 
+    align-items: center;
     width: 100%;
+}
+
+/* Appointment booking links */
+.booking-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    max-width: 100%;
+    padding: 12px 24px;
+    border: 0;
+    border-radius: var(--border-radius-pill);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font: inherit;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.booking-button:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 4px;
+    box-shadow: 0 0 0 4px var(--color-white);
+}
+
+.desktop-menu .booking-button-nav {
+    margin: 0 10px;
+    padding: 10px 18px;
+    background: var(--color-white);
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.booking-button-nav:focus-visible {
+    outline-color: var(--color-accent);
+}
+
+.booking-actions {
+    margin: 28px 0;
 }
 
 /* ==========================================================================
@@ -356,7 +398,7 @@ section:nth-of-type(odd) {
 /* ==========================================================================
    Responsive Styles (Mobile: max-width 768px)
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 980px) {
     /* Navigation */
     .menu-toggle {
         display: flex;
@@ -365,7 +407,8 @@ section:nth-of-type(odd) {
     .desktop-menu {
         display: none;
         flex-direction: column;
-        width: 50%;
+        width: min(300px, 90vw);
+        align-items: stretch;
         position: absolute;
         top: 55px;
         right: 0;
@@ -396,6 +439,12 @@ section:nth-of-type(odd) {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     
+    .desktop-menu .booking-button-nav {
+        margin: 8px 15px;
+    }
+}
+
+@media (max-width: 768px) {
     /* Layout */
     nav {
         display: flex;
