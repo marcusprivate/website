@@ -1,13 +1,6 @@
 import { test, expect, NAV_LINKS, scrollPage } from './fixtures';
 
 test('mobile navigation and slideshow work while testimonials are pending', async ({ page, navigation, slideshow, testimonials, mobile }) => {
-  await page.route('https://widget.simplybook.it/**', route => route.abort());
-  await page.route('**/gc.zgo.at/count.js', route => route.abort());
-  await page.route('https://cdnjs.cloudflare.com/ajax/libs/js-yaml/**', route => route.fulfill({
-    contentType: 'application/javascript',
-    body: 'window.jsyaml = { load: JSON.parse };',
-  }));
-
   let releaseTestimonials!: () => void;
   const responseReady = new Promise<void>(resolve => { releaseTestimonials = resolve; });
   let markRequested!: () => void;

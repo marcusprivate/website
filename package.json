@@ -4,14 +4,20 @@
   "description": "Functional and visual testing suite for Irisabella Healing Texel website",
   "scripts": {
     "test": "playwright test",
+    "test:functional": "playwright test --grep-invert 'Visual Regression'",
+    "test:typecheck": "tsc --noEmit",
     "test:headed": "playwright test --headed",
     "test:visual": "playwright test tests/visual.spec.ts",
-    "test:update-snapshots": "playwright test --update-snapshots",
+    "test:update-snapshots": "playwright test tests/visual.spec.ts --update-snapshots",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.0"
+    "@playwright/test": "1.57.0",
+    "@types/node": "24.10.1",
+    "js-yaml": "4.1.0",
+    "serve": "14.2.4",
+    "typescript": "5.9.3"
   },
   "keywords": [
     "testing",

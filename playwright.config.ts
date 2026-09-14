@@ -61,14 +61,14 @@ export default defineConfig({
 
   // Run local dev server before starting the tests
   webServer: {
-    command: 'npx serve -l 3000',
+    command: 'serve -l 3000',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },
   
   // Snapshot path template for visual tests
-  snapshotPathTemplate: '{testDir}/visual/snapshots/{projectName}/{testFilePath}/{arg}{ext}',
+  snapshotPathTemplate: '{testDir}/visual/snapshots/{platform}/{projectName}/{testFilePath}/{arg}{ext}',
   
   // Expect settings
   expect: {

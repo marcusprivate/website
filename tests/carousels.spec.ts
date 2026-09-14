@@ -35,34 +35,6 @@ async function dispatchTouchSwipe(
   await client.detach();
 }
 
-async function stubExternalScripts(page: Page): Promise<void> {
-  await page.route('https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js', route => route.fulfill({
-    contentType: 'application/javascript',
-    body: `
-      window.jsyaml = {
-        load(yaml) {
-          return yaml
-            .split(/\\n(?=- tekst: \\|)/)
-            .filter(Boolean)
-            .map(block => {
-              const textMatch = block.match(/- tekst: \\|\\n([\\s\\S]*?)\\n  naam:/);
-              const nameMatch = block.match(/\\n  naam:\\s*(.*)/);
-              return {
-                tekst: textMatch ? textMatch[1].replace(/^ {4}/gm, '').trim() : '',
-                naam: nameMatch ? nameMatch[1].trim() : ''
-              };
-            });
-        }
-      };
-    `,
-  }));
-
-  await page.route('**/gc.zgo.at/count.js', route => route.fulfill({
-    contentType: 'application/javascript',
-    body: '',
-  }));
-}
-
 test.describe('Slideshow', () => {
   test('all images exist and only one active at a time', async ({ page, slideshow }) => {
     await page.goto('/');
@@ -175,7 +147,6 @@ test.describe('Testimonials Touch', () => {
   test.skip(({ browserName }) => browserName !== 'chromium', 'Touch tests only on Chromium');
 
   test('mobile horizontal swipe changes testimonials without vertical page drift', async ({ page, testimonials, mobile }) => {
-    await stubExternalScripts(page);
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await testimonials.waitForLoad();
 
