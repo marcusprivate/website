@@ -15,8 +15,8 @@
   "devDependencies": {
     "@playwright/test": "1.57.0",
     "@types/node": "24.10.1",
-    "js-yaml": "4.1.0",
-    "serve": "14.2.4",
+    "js-yaml": "4.3.2",
+    "serve": "14.2.6",
     "typescript": "5.9.3"
   },
   "keywords": [
