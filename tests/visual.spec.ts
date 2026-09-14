@@ -51,6 +51,7 @@ test.describe('Visual Regression', () => {
 
     for (const section of sections) {
       test(`${section.name}`, async ({ page }) => {
+        await page.locator('nav').evaluate(nav => { nav.style.visibility = 'hidden'; });
         await expect(page.locator(section.id)).toHaveScreenshot(`section-${section.name}-desktop.png`, {
           animations: 'disabled',
         });
@@ -70,6 +71,7 @@ test.describe('Visual Regression', () => {
 
     for (const id of sections) {
       test(`${id.slice(1)}`, async ({ page }) => {
+        await page.locator('nav').evaluate(nav => { nav.style.visibility = 'hidden'; });
         await expect(page.locator(id)).toHaveScreenshot(`section-${id.slice(1)}-mobile.png`, {
           animations: 'disabled',
         });

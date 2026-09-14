@@ -1,4 +1,5 @@
 import { test as base, expect, Page, Locator } from '@playwright/test';
+import { stubExternalServices } from './network';
 
 // ============================================================================
 // CONSTANTS
@@ -220,9 +221,15 @@ type TestFixtures = {
   contact: ContactSection;
   desktop: void;
   mobile: void;
+  externalServices: void;
 };
 
 export const test = base.extend<TestFixtures>({
+  externalServices: [async ({ page }, use) => {
+    await stubExternalServices(page);
+    await use();
+  }, { auto: true }],
+
   navigation: async ({ page }, use) => {
     await use(new NavigationComponent(page));
   },
@@ -268,6 +275,17 @@ export function seedRandomScript(): string {
 
 export async function gotoWithSeededRandom(page: Page, path: string = '/'): Promise<void> {
   await page.addInitScript(seedRandomScript());
+  await page.addInitScript(() => {
+    const originalSetTimeout = window.setTimeout;
+    const originalSetInterval = window.setInterval;
+
+    window.setTimeout = ((handler: TimerHandler, delay?: number, ...args: any[]) =>
+      delay === 10000 ? 0 : originalSetTimeout(handler, delay, ...args)
+    ) as typeof window.setTimeout;
+    window.setInterval = ((handler: TimerHandler, delay?: number, ...args: any[]) =>
+      delay === 10000 ? 0 : originalSetInterval(handler, delay, ...args)
+    ) as typeof window.setInterval;
+  });
   await page.goto(path);
 }
 

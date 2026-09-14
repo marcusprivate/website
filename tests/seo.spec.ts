@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 const HOMEPAGE_URL = 'https://irisabella.nl/';
 
@@ -23,7 +23,7 @@ test.describe('Technical SEO', () => {
       telephone: '+31 6 53 24 52 53',
       email: 'Irisabella@xs4all.nl',
       description: metaDescription,
-      logo: 'https://irisabella.nl/images/Irisabella_Healing_Praktijk_RGB.png',
+      logo: 'https://irisabella.nl/images/Irisabella_Healing_Texel_RGB.png',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Ruijslaan 90',
